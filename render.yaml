@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: garimpo-de-ofertas
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    healthCheckPath: /health
+    envVars:
+      - key: APP_HOST
+        value: 0.0.0.0
+      - key: APP_SECRET_KEY
+        generateValue: true
+      - key: AUTO_PUBLISH
+        value: false
+      - key: ML_SITE_ID
+        value: MLB
+      - key: ML_SEARCH_TERMS
+        value: fone bluetooth;aspirador vertical;cadeira de escritório;monitor 24
+      - key: MIN_DISCOUNT_PERCENT
+        value: "15"
+      - key: MAX_PRICE_BRL
+        value: "1000"
